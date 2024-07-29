@@ -1,11 +1,16 @@
 sequenceDiagram
-    participant Usuario
-    participant Navegador
-    participant Servidor
+    participant User
+    participant Browser
+    participant Server
 
-    Usuario->>Navegador: Envía nueva nota
-    Navegador->>+Servidor: POST /exampleapp/new_note
-    Servidor-->>-Navegador: 302 Found (Redirige)
-    Navegador->>+Servidor: GET /nueva_ubicacion (Redirigido)
-    Servidor-->>-Navegador: 200 OK (Contenido de la nueva página)
-    Navegador-->>Usuario: Muestra nueva página
+    User->>Browser: Submit new note
+    Browser->>Server: POST /exampleapp/new_note
+    Server-->>Browser: 302 Found (Redirect)
+    Browser->>Server: GET /new_location (Redirected)
+    Server-->>Browser: 200 OK (New page content)
+    Browser->>User: Display new page
+
+    User->>Browser: Request to view notes
+    Browser->>Server: GET /exampleapp/notes
+    Server-->>Browser: 200 OK (List of notes)
+    Browser->>User: Display list of notes
